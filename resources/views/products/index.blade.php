@@ -13,7 +13,6 @@
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
             <a class="btn btn-primary col-2 mb-2" href="{{ route('products.create') }}">Create New</a>
         </div>
-
         <table class="table table-striped">
             <tr>
                 <th>#</th>
@@ -36,13 +35,13 @@
                 <td>{{ $product->unit_price }}</td>
                 <td>{{ $product->unit_in_stock }}</td>
                 <td>{{ $product->unit_on_order }}</td>
-                <td><a href="{{ route('products.edit',$product->id) }}">Edit</a></td>
-                <td><a href="{{ route('products.show',$product->id) }}">Show</a></td>
+                <td><a class="btn btn-primary btn-sm" href="{{ route('products.edit',$product->id) }}">Edit</a></td>
+                <td><a class="btn btn-info btn-sm" href="{{ route('products.show',$product->id) }}">Show</a></td>
                 <td>
                     <form method="POST" action="{{ route('products.destroy',$product->id) }}">
                         @csrf
                         @method('delete')
-                        <input type="submit" value="Delete">
+                        <input class="btn btn-danger btn-sm" type="submit" value="Delete">
                     </form>
                 </td>
 
