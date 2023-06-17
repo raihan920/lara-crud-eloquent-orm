@@ -74,4 +74,20 @@ class ProductController extends Controller
         return redirect()->route('products.index')
                 ->withSuccess('Product has been deleted successfully.');
     }
+
+    /* To see the soft deleted data. */
+    public function trashed(){
+        $products = Product::onlyTrashed()->get();
+        return view('products.trashed', compact('products'));
+    }
+
+    public function restore($id){
+        $product = Product::withTrashed()->find($id);
+        if($product){
+            $product->restore();
+            return redirect()->route('products.trashed')->withSuccess('Data restored successfully!');
+        }else{
+            return redirect()->route('products.trashed')->with('error','Data could not be restored!');
+        }
+    }
 }

@@ -3,9 +3,16 @@
 @section('content')
 <div class="row">
     <h2 class="text-center">View Individual Data</h2>
-    <div class="my-3">
-        <a href="{{ url()->previous() }}" class="btn btn-sm btn-secondary"><i class="fa-solid fa-arrow-left"></i> Go Back</a>
-        <a href="{{ route('products.index') }}" class="btn btn-sm btn-success"><i class="fa-solid fa-home"></i> Home</a>
+
+    <div class="my-3 d-flex justify-content-between">
+        <div class="">
+            @include('includes.buttons.go-back')
+            @include('includes.buttons.home')
+        </div>
+        <div class="">
+            @include('includes.buttons.view-trashed')
+            @include('includes.buttons.create-new')
+        </div>
     </div>
     <div class="my-3">
         <label for="productName" class="form-label">Product Name</label>

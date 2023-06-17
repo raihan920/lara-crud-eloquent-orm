@@ -31,4 +31,7 @@ Route::group(['prefix' => 'products'], function() {
     Route::get('/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
     Route::patch('/{product}/update', [ProductController::class, 'update'])->name('products.update');
     Route::delete('/{product}/delete', [ProductController::class, 'destroy'])->name('products.destroy');
+
+    Route::get('/trashed', [ProductController::class, 'trashed'])->name('products.trashed');
+    Route::post('/{id}/restore', [ProductController::class, 'restore'])->name('products.restore');
 });

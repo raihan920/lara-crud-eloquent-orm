@@ -7,19 +7,24 @@
         {{ session()->get('success'); }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
+    @elseif (session('error'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{ session()->get('error'); }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
     @endif
 
-    <h2 class="text-center">View all available products</h2>
+    <h2 class="text-center">View all trashed products</h2>
     <div class="my-3 d-flex justify-content-between">
         <div class="">
             @include('includes.buttons.go-back')
             @include('includes.buttons.home')
         </div>
         <div class="">
-            @include('includes.buttons.view-trashed')
             @include('includes.buttons.create-new')
         </div>
     </div>
+
     <table class="table table-striped">
         <tr>
             <th>#</th>
@@ -45,10 +50,9 @@
             <td><a class="btn btn-primary btn-sm" href="{{ route('products.edit',$product->id) }}">Edit</a></td>
             <td><a class="btn btn-info btn-sm" href="{{ route('products.show',$product->id) }}">Show</a></td>
             <td>
-                <form method="POST" action="{{ route('products.destroy',$product->id) }}">
+                <form method="POST" action="{{ route('products.restore',$product->id) }}">
                     @csrf
-                    @method('delete')
-                    <input class="btn btn-danger btn-sm" type="submit" value="Delete">
+                    <input class="btn btn-success btn-sm" type="submit" value="Restore">
                 </form>
             </td>
 
