@@ -13,6 +13,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         // $schedule->command('inspire')->hourly();
+        //it will work like the command: php artisan model:prune
+        $schedule->command('model:prune --force')->dailyAt('14:14');
     }
 
     /**

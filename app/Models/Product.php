@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Prunable;
 
 class Product extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, Prunable;
     protected $fillable = [
         'product_name',
         'category_id',
@@ -18,4 +20,15 @@ class Product extends Model
         'unit_in_stock',
         'unit_on_order'
     ];
+
+    public function prunable(): Builder{
+        //will delete the records that are older than 30 days
+        return static::where('deleted_at','<=',now()->subMonth());
+    }
+
+    public function pruning(): void{
+        //will show the product name that are being deleted in the command prompt
+        //command: php artisan model:prune
+        echo 'Pruning '. $this->product_name.PHP_EOL;
+    }
 }

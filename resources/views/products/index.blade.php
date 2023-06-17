@@ -12,7 +12,6 @@
     <h2 class="text-center">View all available products</h2>
     <div class="my-3 d-flex justify-content-between">
         <div class="">
-            @include('includes.buttons.go-back')
             @include('includes.buttons.home')
         </div>
         <div class="">
