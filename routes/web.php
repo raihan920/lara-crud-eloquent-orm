@@ -34,4 +34,5 @@ Route::group(['prefix' => 'products'], function() {
 
     Route::get('/trashed', [ProductController::class, 'trashed'])->name('products.trashed');
     Route::post('/{id}/restore', [ProductController::class, 'restore'])->name('products.restore');
+    Route::delete('/{id}/force-delete', [ProductController::class, 'forceDelete'])->name('products.force-delete');
 });

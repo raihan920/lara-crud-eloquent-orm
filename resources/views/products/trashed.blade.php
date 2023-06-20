@@ -35,7 +35,7 @@
             <th>Unit Price</th>
             <th>Unit in Stock</th>
             <th>Unit on Order</th>
-            <th colspan="3">Action</th>
+            <th colspan="4">Action</th>
         </tr>
         @forelse ($products as $product)
         <tr>
@@ -53,6 +53,13 @@
                 <form method="POST" action="{{ route('products.restore',$product->id) }}">
                     @csrf
                     <input class="btn btn-success btn-sm" type="submit" value="Restore">
+                </form>
+            </td>
+            <td>
+                <form method="POST" action="{{ route('products.force-delete', $product->id) }}">
+                    @csrf
+                    @method('delete')
+                    <input class="btn btn-danger btn-sm" type="submit" value="Delete">
                 </form>
             </td>
 

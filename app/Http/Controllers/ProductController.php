@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -88,6 +89,17 @@ class ProductController extends Controller
             return redirect()->route('products.trashed')->withSuccess('Data restored successfully!');
         }else{
             return redirect()->route('products.trashed')->with('error','Data could not be restored!');
+        }
+    }
+
+    //force delete
+    public function forceDelete(Request $request, $id){
+        $product = Product::withTrashed()->find($id);
+        if($product){
+            $product->forceDelete();
+            return redirect()->route('products.trashed')->withSuccess('Data deleted successfully!');
+        }else{
+            return redirect()->route('products.trashed')->with('error','Data could not be deleted!');
         }
     }
 }
