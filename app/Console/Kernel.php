@@ -14,7 +14,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         //it will work like the command: php artisan model:prune
-        $schedule->command('model:prune --force')->dailyAt('14:14');
+        $schedule->command('model:prune')->daily()->at('09:58');
     }
 
     /**

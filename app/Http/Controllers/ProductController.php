@@ -6,6 +6,8 @@ use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use Illuminate\Http\Request;
+// use Illuminate\Http\RedirectResponse;
+use Illuminate\Validation\ValidationException;
 
 class ProductController extends Controller
 {
@@ -101,5 +103,25 @@ class ProductController extends Controller
         }else{
             return redirect()->route('products.trashed')->with('error','Data could not be deleted!');
         }
+    }
+
+    //redirect to replicate form
+    public function viewReplicate(Product $product){
+       return view('products.view-replicate', compact('product'));
+    }
+
+    //replicate record
+    public function replicate(Request $request, $id){
+        $validated = $request->validate([
+            'product_name' => 'required|unique:products'
+        ]);
+
+        $product = Product::find($id);
+        $newProduct = $product->replicate();
+        $newProduct->product_name = $request->product_name;
+        $newProduct->save();
+        return redirect()
+            ->route('products.index')
+            ->with('success','New product inserted successfully with replicated data!');
     }
 }

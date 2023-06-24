@@ -29,7 +29,7 @@
             <th>Unit Price</th>
             <th>Unit in Stock</th>
             <th>Unit on Order</th>
-            <th colspan="3">Action</th>
+            <th colspan="4">Action</th>
         </tr>
         @forelse ($products as $product)
         <tr>
@@ -43,6 +43,7 @@
             <td>{{ $product->unit_on_order }}</td>
             <td><a class="btn btn-primary btn-sm" href="{{ route('products.edit',$product->id) }}">Edit</a></td>
             <td><a class="btn btn-info btn-sm" href="{{ route('products.show',$product->id) }}">Show</a></td>
+            <td><a class="btn btn-success btn-sm" href="{{ route('products.view-replicate',$product->id) }}">Replicate</a></td>
             <td>
                 <form method="POST" action="{{ route('products.destroy',$product->id) }}">
                     @csrf
