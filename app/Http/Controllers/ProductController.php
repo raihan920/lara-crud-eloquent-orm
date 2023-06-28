@@ -124,4 +124,9 @@ class ProductController extends Controller
             ->route('products.index')
             ->with('success','New product inserted successfully with replicated data!');
     }
+
+    public function getTrashedItems(){
+        $trashedItems = Product::TrashedItems()->get();
+        dd($trashedItems->toArray());
+    }
 }

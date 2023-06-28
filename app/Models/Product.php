@@ -31,4 +31,8 @@ class Product extends Model
         //command: php artisan model:prune
         echo 'Pruning '. $this->product_name.PHP_EOL;
     }
+
+    public function scopeTrashedItems($query){
+        return $query->onlyTrashed();
+    }
 }
