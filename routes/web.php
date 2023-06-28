@@ -39,4 +39,5 @@ Route::group(['prefix' => 'products'], function() {
     Route::post('/{id}/replicate', [ProductController::class, 'replicate'])->name('products.replicate');
 
     Route::get('/get-trashed-items', [ProductController::class, 'getTrashedItems'])->name('products.get-trashed-items');
+    Route::get('/get-all-items', [ProductController::class, 'getTrashedItems'])->name('products.get-all-items');
 });

@@ -129,4 +129,9 @@ class ProductController extends Controller
         $trashedItems = Product::TrashedItems()->get();
         dd($trashedItems->toArray());
     }
+
+    public function getAllItems(){
+        $allItems = Product::get();
+        dd($allItems->toArray());
+    }
 }

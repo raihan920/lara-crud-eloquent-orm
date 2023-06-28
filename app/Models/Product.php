@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Scopes\AllScope;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -20,6 +21,11 @@ class Product extends Model
         'unit_in_stock',
         'unit_on_order'
     ];
+
+    protected static function boot(){
+        parent::boot();
+        static::addGlobalScope(new AllScope);
+    }
 
     public function prunable(): Builder{
         //will delete the records that are older than 30 days
