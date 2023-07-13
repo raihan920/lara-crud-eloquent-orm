@@ -13,6 +13,7 @@ class AllScope implements Scope
      */
     public function apply(Builder $builder, Model $model): void
     {
+        //will get all products whether they are deleted or not
         $builder->orWhere('deleted_at','=',Null)->orWhereNot('deleted_at',Null);
     }
 }
