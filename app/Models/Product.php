@@ -26,14 +26,12 @@ class Product extends Model
     protected static function boot(){
         parent::boot();
         static::addGlobalScope(new AllScope);
-        Product::creating(function ($product){
-            $slug = Str::slug($product->product_name);
-
-            dd($slug);
-
-            $count = Product::whereRaw("product_name RLIKE '^{$slug}([0-9]+)?$'")->count();
-            $product->product_name = $count ? "{$slug}-{$count}" : $slug;
-        });
+        //event trigger during create
+        // Product::creating(function ($product){
+        //     $slug = Str::slug($product->product_name);
+        //     $count = Product::whereRaw("product_name RLIKE '^{$slug}([0-9]+)?$'")->count();
+        //     $product->product_name = $count ? "{$slug}-{$count}" : $slug;
+        // });
 
     }
 
