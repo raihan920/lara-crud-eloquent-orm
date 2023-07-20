@@ -41,3 +41,14 @@ Route::group(['prefix' => 'products'], function() {
     Route::get('/get-trashed-items', [ProductController::class, 'getTrashedItems'])->name('products.get-trashed-items');
     Route::get('/get-all-items', [ProductController::class, 'getTrashedItems'])->name('products.get-all-items');
 });
+
+//one to one relationship implementation
+use App\Models\User;
+Route::get('/getinfo/{user_id}', function($user_id){
+    $user = User::find($user_id);
+    if($user){
+        echo $user->user_name,"<br>",$user->profile->first_name,"<br>",$user->profile->last_name,"<br>",$user->profile->age;
+    }else{
+        echo "User not foud";
+    }
+});
