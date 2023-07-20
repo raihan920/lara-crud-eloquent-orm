@@ -84,3 +84,17 @@ Route::get('/update/{user_id}',function($user_id){
     $profile->age = 24;
     $profile->save();
 });
+
+//delete for one to one relationship
+//should always be done with "post/delete" method
+//for simplicity it is done with "get" method here
+Route::get('/delete/{user_id}',function($user_id){
+    $user = User::find($user_id);
+    if($user){
+        $profile = $user->profile;
+        if($profile){
+            $profile->delete();
+        }
+        $user->delete();
+    }
+});
