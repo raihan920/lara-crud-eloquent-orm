@@ -71,3 +71,16 @@ Route::get('/insert', function(){
     $profile->gender = "Male";
     $profile->save();
 });
+
+//update for one to one relationship
+//should always be done with "post" method
+//for simplicity it is done with "get" method here
+Route::get('/update/{user_id}',function($user_id){
+    $user = User::find($user_id);
+    $user->email = "test@email.com";
+    $user->save();
+
+    $profile = $user->profile;
+    $profile->age = 24;
+    $profile->save();
+});
