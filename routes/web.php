@@ -52,3 +52,22 @@ Route::get('/getinfo/{user_id}', function($user_id){
         echo "User not foud";
     }
 });
+
+//insert should always be done with "post" method
+//for simplicity it is done with "get" method here
+use App\Models\Profile;
+Route::get('/insert', function(){
+    $user = new User();
+    $user->user_name = "raihan03";
+    $user->email = "raihan03@email.com";
+    // $user->timestamps();
+    $user->save();
+
+    $profile = new Profile();
+    $profile->user_id = $user->id;
+    $profile->first_name = "Musa";
+    $profile->last_name = "Ahmed";
+    $profile->age = 29;
+    $profile->gender = "Male";
+    $profile->save();
+});

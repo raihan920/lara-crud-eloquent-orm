@@ -9,6 +9,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Profile extends Model
 {
     use HasFactory;
+    //if you don't want the 'inserted_at' and 'deleted_at' field in profile table
+    //then you have to disable the timestamps
+    public $timestamps = FALSE;
 
     protected $fillable = [
         'user_id',
