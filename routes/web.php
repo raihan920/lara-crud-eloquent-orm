@@ -172,3 +172,17 @@ Route::get('onetomany-insert-2/{user_id}',function($userID){
         }
     }
 });
+//updating a post
+//post method should be used in real apps instead of get method
+Route::get('nano-update/{user_id}/{post_id}', function($userID, $postID){
+    $user = User::find($userID);
+
+    if($user){
+        $post = $user->posts->find($postID);
+        if($post){
+            $post->title = "Updated awesome title";
+            $post->content = "Updated great and awesome content";
+            $post->save();
+        }
+    }
+});

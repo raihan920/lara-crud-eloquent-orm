@@ -54,6 +54,8 @@ class User extends Authenticatable
     }
 
     //for one to many relationship
+    //should be public function
+    //protected functions don't work properly
     public function posts(): HasMany {
         return $this->hasMany(Post::class);
     }
