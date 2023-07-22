@@ -128,3 +128,26 @@ Route::get('getuser/{post_id}', function($postID){
         echo "No posts found!";
     }
 });
+
+//create a user and some of his posts
+//post method should be used in real apps instead of get method
+Route::get('onetomany-insert', function(){
+    $user = new User();
+    $user->user_name = "Abdur Rahman";
+    $user->email = "rahman@email.com";
+    $user->save();
+
+    $posts = [
+        ['title'=>"The special one", 'content'=>"The content of the special one."],
+        ['title'=>"The special two", 'content'=>"The content of the special two."],
+        ['title'=>"The special three", 'content'=>"The content of the special three."]
+    ];
+
+    foreach($posts as $postData){
+        $post = new Post();
+        $post->title = $postData['title'];
+        $post->content = $postData['content'];
+        $post->user_id = $user->id;
+        $post->save();
+    }
+});
