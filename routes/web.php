@@ -113,3 +113,18 @@ Route::get('getposts/{user_id}',function($user_id){
         }
     }
 });
+
+//get the user of a post
+Route::get('getuser/{post_id}', function($postID){
+    $post = Post::find($postID);
+    if($post){
+        $user = $post->user;
+        if($user){
+            echo "ID: ",$user->id,"<br>","Name: ",$user->user_name,"<hr>";
+        }else{
+            echo "No user found!";
+        }
+    }else{
+        echo "No posts found!";
+    }
+});
