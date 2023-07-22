@@ -98,3 +98,18 @@ Route::get('/delete/{user_id}',function($user_id){
         $user->delete();
     }
 });
+
+//one to many relationship
+//get all the posts of an user
+use App\Models\Post;
+Route::get('getposts/{user_id}',function($user_id){
+    $user = User::find($user_id);
+    $allPosts = $user->posts;
+    if($allPosts->isEmpty()){
+        echo "No posts found!";
+    }else{
+        foreach($allPosts as $post){
+            echo "ID: ",$post->id,"<br>","Ttle: ",$post->title,"<br>","Content: ",$post->content,"<hr>";
+        }
+    }
+});
