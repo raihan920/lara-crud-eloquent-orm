@@ -151,3 +151,24 @@ Route::get('onetomany-insert', function(){
         $post->save();
     }
 });
+//existing user will create some post
+//post method should be used in real apps instead of get method
+Route::get('onetomany-insert-2/{user_id}',function($userID){
+    $user = User::find($userID);
+    if($user){
+        $posts = [
+            ['title'=>"My title one", 'content'=>"The content of my title one."],
+            ['title'=>"My title two", 'content'=>"The content of my title two."],
+            ['title'=>"My title three", 'content'=>"The content of my title three."]
+        ];
+        $createdPosts = [];
+        foreach($posts as $postData){
+            $post = new Post();
+            $post->title = $postData['title'];
+            $post->content = $postData['content'];
+            $post->user()->associate($user);
+            $post->save();
+            $createdPosts[] = $post;
+        }
+    }
+});
