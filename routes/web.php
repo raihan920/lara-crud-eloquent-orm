@@ -186,3 +186,17 @@ Route::get('nano-update/{user_id}/{post_id}', function($userID, $postID){
         }
     }
 });
+
+//Many to many relationship,
+//retrieving data
+Route::get('userdetails/{user_id}',function($userID){
+    $user = User::find($userID);
+    if($user){
+        $userName = $user->user_name;
+        $userRoles = $user->roles()->pluck('name')->toArray();
+        echo "User Name: ",$userName.PHP_EOL;
+        echo "User Roles: ".implode(', ', $userRoles).PHP_EOL;
+    }else{
+        echo "User not found!";
+    }
+});
