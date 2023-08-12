@@ -200,3 +200,21 @@ Route::get('userdetails/{user_id}',function($userID){
         echo "User not found!";
     }
 });
+
+//has one through
+//getting data through mechanic
+use App\Models\Mechanic;
+Route::get('get-mechanic', function(){
+    $mechanics = Mechanic::get();
+    foreach($mechanics as $mechanic){
+        echo "Car Model: ".$mechanic->car->model, ", Car Owner:". $mechanic->owner->name, ", Mechanic Name: ".$mechanic->name ."<br/>";
+    }
+});
+//getting data through owner
+use App\Models\Owner;
+Route::get('get-owner', function(){
+    $owners = Owner::get();
+    foreach($owners as $owner){
+        echo "Car Model: ".$owner->car->model, ", Car Owner:". $owner->name, ", Mechanic Name: ".$owner->car->mechanic->name ."<br/>";
+    }
+});
